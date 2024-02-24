@@ -5,3 +5,14 @@ export const grayTheme = {
 export const neutralTheme = {
   white: '#ffffff',
 };
+
+export const mainTheme = {
+  primary: '#8C29B0',
+};
+
+export const purpleTheme = {
+  purple80: '#512c85',
+};
+export const pinkTheme = {
+  pink80: '#c833db',
+};
