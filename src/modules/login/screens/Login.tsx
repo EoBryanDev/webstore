@@ -22,6 +22,8 @@ const Login = () => {
           title="Sign in"
           margin="16px"
           onPress={handleOnPress}
+          loading={true}
+          // disabled
         />
       </ContainerLogin>
     </View>

@@ -30,3 +30,11 @@ export const ButtonGradient = styled(LinearGradient)<ButtonContainerProps>`
   align-items: center;
   ${(props) => (props.margin ? `margin: ${props.margin}` : '')}
 `;
+
+export const ActivityIndicatorSpinner = styled.ActivityIndicator`
+  margin: 2px;
+`;
+
+export const ButtonDisabled = styled(ButtonContainer)<ButtonContainerProps>`
+  background-color: ${theme.colors.grayTheme.gray100};
+`;
