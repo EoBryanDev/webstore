@@ -13,6 +13,9 @@ const Login = () => {
     <View>
       <ContainerLogin>
         <Input
+          title="Email:"
+          placeholder="Digite seu e-mail"
+          placeholderTextColor={theme.colors.grayTheme.gray80}
           onChange={(e) => {
             console.log(e.nativeEvent.text);
           }}
@@ -22,7 +25,7 @@ const Login = () => {
           title="Sign in"
           margin="16px"
           onPress={handleOnPress}
-          loading={true}
+          // loading={true}
           // disabled
         />
       </ContainerLogin>
