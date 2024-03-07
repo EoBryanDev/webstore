@@ -7,18 +7,20 @@ import { ContainerLogin } from '../styles/login.style';
 
 const Login = () => {
   const handleOnPress = () => {
-    console.log('clicked');
+    // console.log('clicked');
+    null;
   };
   return (
     <View>
       <ContainerLogin>
         <Input
-          title="Email:"
-          placeholder="Digite seu e-mail"
+          title="E-mail:"
+          placeholder="Type your e-mail"
           placeholderTextColor={theme.colors.grayTheme.gray80}
           onChange={(e) => {
             console.log(e.nativeEvent.text);
           }}
+          errorMessage="E-mail or password invalid !"
         />
         <Button
           type={theme.buttons.buttonsTheme.primary}
