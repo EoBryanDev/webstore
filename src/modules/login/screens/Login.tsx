@@ -20,7 +20,7 @@ const Login = () => {
           onChange={(e) => {
             console.log(e.nativeEvent.text);
           }}
-          errorMessage="E-mail or password invalid !"
+          // errorMessage="E-mail or password invalid !"
         />
         <Button
           type={theme.buttons.buttonsTheme.primary}
