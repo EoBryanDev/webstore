@@ -14,8 +14,19 @@ const Login = () => {
     <View>
       <ContainerLogin>
         <Input
+          margin="0px 0px 8px 0px"
           title="E-mail:"
           placeholder="Type your e-mail"
+          placeholderTextColor={theme.colors.grayTheme.gray80}
+          onChange={(e) => {
+            console.log(e.nativeEvent.text);
+          }}
+          // errorMessage="E-mail or password invalid !"
+        />
+        <Input
+          secureTextEntry
+          title="Password:"
+          placeholder="Type yourPassword"
           placeholderTextColor={theme.colors.grayTheme.gray80}
           onChange={(e) => {
             console.log(e.nativeEvent.text);
