@@ -1,52 +1,57 @@
-import axios from 'axios';
-import { View } from 'react-native';
+import { NativeSyntheticEvent, TextInputChangeEventData, View } from 'react-native';
 
 import Button from '../../../shared/components/Button';
 import Input from '../../../shared/components/Input';
 import { theme } from '../../../shared/themes/theme';
+import { useLogin } from '../hooks/useLogin';
 import { ContainerLogin, ImageLogo } from '../styles/login.style';
 
 const Login = () => {
-  const handleOnPress = async () => {
-    // console.log('clicked');
-    try {
-      // testando axios no projeto
-      const testBD = await axios.get('http://192.168.0.17:8080/correios/01029-010');
-      console.log(testBD.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {
+    email,
+    password,
+    loading,
+    errorMessage,
+    handleOnPress,
+    setEmail,
+    setPassword,
+    setErrorMessage,
+  } = useLogin();
+
   return (
     <View>
       <ContainerLogin>
         <ImageLogo resizeMode="center" source={require('../../../assets/images/logo.png')} />
         <Input
+          value={email}
           margin="0px 0px 8px 0px"
           title="E-mail:"
           placeholder="Type your e-mail"
           placeholderTextColor={theme.colors.grayTheme.gray80}
-          onChange={(e) => {
-            console.log(e.nativeEvent.text);
+          onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+            setErrorMessage('');
+            setEmail(e.nativeEvent.text);
           }}
-          // errorMessage="E-mail or password invalid !"
+          errorMessage={errorMessage}
         />
         <Input
+          value={password}
           secureTextEntry
           title="Password:"
           placeholder="Type yourPassword"
           placeholderTextColor={theme.colors.grayTheme.gray80}
-          onChange={(e) => {
-            console.log(e.nativeEvent.text);
+          onChange={(e: NativeSyntheticEvent<TextInputChangeEventData>) => {
+            setErrorMessage('');
+            setPassword(e.nativeEvent.text);
           }}
-          // errorMessage="E-mail or password invalid !"
+          errorMessage={errorMessage}
         />
         <Button
           type={theme.buttons.buttonsTheme.primary}
           title="Sign in"
           margin="16px"
           onPress={handleOnPress}
-          // loading={true}
+          loading={loading}
           // disabled
         />
       </ContainerLogin>
