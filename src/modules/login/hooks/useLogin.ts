@@ -1,5 +1,6 @@
-import axios from 'axios';
 import { useState } from 'react';
+
+import { connectionAPIPost } from '../../../shared/functions/connection/connectionAPI';
 
 export const useLogin = () => {
   const [email, setEmail] = useState<string>('');
@@ -10,9 +11,8 @@ export const useLogin = () => {
     // console.log('clicked');
     setLoading(true);
     try {
-      // testando axios no projeto
-      const resp = await axios.post('http://192.168.0.17:8080/auth', { email, password });
-      console.log(resp.data);
+      // testando axios no projeto pode ser que o ip mude !! cuidado
+      await connectionAPIPost('http://192.168.0.14:8080/auth', { email, password });
     } catch (error) {
       setErrorMessage('E-mail or Password is incorrect!');
       console.log(error);
