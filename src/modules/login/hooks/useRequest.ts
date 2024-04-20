@@ -3,13 +3,12 @@ import { useState } from 'react';
 import { connectionAPIPost } from '../../../shared/functions/connection/connectionAPI';
 import { IRequestLogin } from '../../../shared/types/requestLogin';
 import { IReturnLogin } from '../../../shared/types/returnLogin';
-import { TUserType } from '../../../shared/types/userType';
-import { useDispatch } from 'react-redux';
-import { setUserAction } from '../../../store/reducers/userReducer';
 import { useUserReducer } from '../../../store/reducers/userReducer/useUserReducer';
+import { useGlobalReducer } from '../../../store/reducers/globalReducer/useGlobalReducer';
 
 export const useRequest = () => {
   const { setUser } = useUserReducer();
+  const { setModal } = useGlobalReducer();
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   // const [user, setUser] = useState<TUserType | undefined>();
@@ -22,7 +21,7 @@ export const useRequest = () => {
       const response = await connectionAPIPost<IReturnLogin>('http://192.168.0.14:8080/auth', body);
       setUser(response.user);
     } catch (error) {
-      setErrorMessage('E-mail or Password is incorrect!');
+      setModal({ visible: true, title: 'Error', text: 'User or password is invalid!' });
     } finally {
       setLoading(false);
     }
