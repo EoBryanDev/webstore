@@ -6,9 +6,10 @@ import { IReturnLogin } from '../../../shared/types/returnLogin';
 import { TUserType } from '../../../shared/types/userType';
 import { useDispatch } from 'react-redux';
 import { setUserAction } from '../../../store/reducers/userReducer';
+import { useUserReducer } from '../../../store/reducers/userReducer/useUserReducer';
 
 export const useRequest = () => {
-  const dispatch = useDispatch()
+  const { setUser } = useUserReducer();
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
   // const [user, setUser] = useState<TUserType | undefined>();
@@ -19,8 +20,7 @@ export const useRequest = () => {
       // testando axios no projeto pode ser que o ip mude !! cuidado
       // console.log(body);
       const response = await connectionAPIPost<IReturnLogin>('http://192.168.0.14:8080/auth', body);
-
-      dispatch(setUserAction(response.user));
+      setUser(response.user);
     } catch (error) {
       setErrorMessage('E-mail or Password is incorrect!');
     } finally {
