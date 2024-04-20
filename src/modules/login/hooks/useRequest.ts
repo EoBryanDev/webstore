@@ -4,11 +4,14 @@ import { connectionAPIPost } from '../../../shared/functions/connection/connecti
 import { IRequestLogin } from '../../../shared/types/requestLogin';
 import { IReturnLogin } from '../../../shared/types/returnLogin';
 import { TUserType } from '../../../shared/types/userType';
+import { useDispatch } from 'react-redux';
+import { setUserAction } from '../../../store/reducers/userReducer';
 
 export const useRequest = () => {
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>('');
-  const [user, setUser] = useState<TUserType | undefined>();
+  // const [user, setUser] = useState<TUserType | undefined>();
 
   const authRequest = async (body: IRequestLogin) => {
     setLoading(true);
@@ -17,7 +20,7 @@ export const useRequest = () => {
       // console.log(body);
       const response = await connectionAPIPost<IReturnLogin>('http://192.168.0.14:8080/auth', body);
 
-      setUser(response.user);
+      dispatch(setUserAction(response.user));
     } catch (error) {
       setErrorMessage('E-mail or Password is incorrect!');
     } finally {
@@ -26,7 +29,6 @@ export const useRequest = () => {
   };
 
   return {
-    user,
     loading,
     errorMessage,
     setErrorMessage,
