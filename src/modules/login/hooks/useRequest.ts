@@ -7,6 +7,7 @@ import { useUserReducer } from '../../../store/reducers/userReducer/useUserReduc
 import { useGlobalReducer } from '../../../store/reducers/globalReducer/useGlobalReducer';
 import { useNavigation } from '@react-navigation/native';
 import { MenuUrl } from '../../../shared/enums/MenuUrl.enum';
+import { setAuthorizationToken } from '../../../shared/functions/connection/auth';
 
 export const useRequest = () => {
   const { reset } = useNavigation();
@@ -22,6 +23,7 @@ export const useRequest = () => {
       // testando axios no projeto pode ser que o ip mude !! cuidado
       // console.log(body);
       const response = await connectionAPIPost<IReturnLogin>('http://192.168.0.14:8080/auth', body);
+      setAuthorizationToken(response.accessToken);
       setUser(response.user);
       reset({
         index: 0,
