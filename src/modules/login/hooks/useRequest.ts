@@ -5,8 +5,10 @@ import { IRequestLogin } from '../../../shared/types/requestLogin';
 import { IReturnLogin } from '../../../shared/types/returnLogin';
 import { useUserReducer } from '../../../store/reducers/userReducer/useUserReducer';
 import { useGlobalReducer } from '../../../store/reducers/globalReducer/useGlobalReducer';
+import { useNavigation } from '@react-navigation/native';
 
 export const useRequest = () => {
+  const { navigate } = useNavigation();
   const { setUser } = useUserReducer();
   const { setModal } = useGlobalReducer();
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,6 +22,7 @@ export const useRequest = () => {
       // console.log(body);
       const response = await connectionAPIPost<IReturnLogin>('http://192.168.0.14:8080/auth', body);
       setUser(response.user);
+      navigate('Home')
     } catch (error) {
       setModal({ visible: true, title: 'Error', text: 'User or password is invalid!' });
     } finally {
